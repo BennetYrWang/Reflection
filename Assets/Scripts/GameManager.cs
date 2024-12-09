@@ -1,26 +1,57 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AudioAssetManager), typeof(SpriteAssetManager))]
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance => _instance;
+    private static GameManager _instance;
+    
     [SerializeField] private GameObject imagePoster;
+    [SerializeField] private Image backgroundImage;
+    
+    [Header("Controller")]
+    public bool controllerEnabled;
+    public KeyCode InteractKey => interactKey;
+    [SerializeField] private KeyCode interactKey = KeyCode.Mouse0;
+    public KeyCode CancelKey => cancelKey;
+    [SerializeField] private KeyCode cancelKey = KeyCode.Mouse1;
+    public event Action OnControllerKeyPressed;
+    private List<KeyCode> _pressedControlKey = new(5);
+    public ReadOnlyCollection<KeyCode> PressedControlKey => _pressedControlKey.AsReadOnly();
+
+    
+    
     
     private AudioSource _audioSource;
     private AudioAssetManager _audioAssetManager;
     private SpriteAssetManager _spriteAssetManager;
     private Dictionary<string, GameObject> postedImages = new();
 
-    [SerializeField] private Image backgroundImage;
 
-    private void Start()
+    private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _audioAssetManager = GetComponent<AudioAssetManager>();
-        
+        _instance = this;
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            _pressedControlKey.Clear();
+            if (Input.GetKeyDown(interactKey))
+                _pressedControlKey.Add(interactKey);
+            if(Input.GetKeyDown(cancelKey))
+                _pressedControlKey.Add(cancelKey);
+            if (_pressedControlKey.Count > 0)
+                OnControllerKeyPressed?.Invoke();
+        }
     }
 
     public void PlaySfx(string sfxName)

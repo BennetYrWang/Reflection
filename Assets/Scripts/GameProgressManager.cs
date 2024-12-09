@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using UnityEngine;
 
-public class GameProgressManager
+public class GameProgressManager : MonoBehaviour
 {
+    
     private static readonly Dictionary<string, PropertyInfo> PropertyMap;
-
+    private static GameProgressManager _instance;
+    public static GameProgressManager Instance => _instance;
     static GameProgressManager()
     {
         // 初始化属性映射
@@ -14,7 +17,12 @@ public class GameProgressManager
         foreach (var property in typeof(GameProgressManager).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             PropertyMap[property.Name] = property;
     }
-    
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
     public void SetProperty(string propertyName, string value)
     {
         // 尝试从缓存中获取属性信息

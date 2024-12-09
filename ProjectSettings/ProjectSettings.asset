@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: bf1eab47b3af8b345bb17bb70d46e12b
+  productGUID: da67098c27387ac46994dfc0d8ae3aaf
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -595,14 +595,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Reflection
+  metroPackageName: Hated by Life Itself
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Reflection
+  metroApplicationDescription: Hated by Life Itself
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
