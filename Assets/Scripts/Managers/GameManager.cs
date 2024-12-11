@@ -2,17 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Interaction;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioAssetManager), typeof(SpriteAssetManager))]
+[RequireComponent(typeof(AudioAssetManager), typeof(SpriteAssetManager), typeof(HoverableCollider2DManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance => _instance;
     private static GameManager _instance;
     
-    [SerializeField] private GameObject imagePoster;
-    [SerializeField] private Image backgroundImage;
     
     [Header("Controller")]
     public bool controllerEnabled;
@@ -24,7 +23,9 @@ public class GameManager : MonoBehaviour
     private List<KeyCode> _pressedControlKey = new(5);
     public ReadOnlyCollection<KeyCode> PressedControlKey => _pressedControlKey.AsReadOnly();
 
-    
+    [Header("Image")]
+    [SerializeField] private GameObject imagePoster;
+    [SerializeField] private Image backgroundImage;
     
     
     private AudioSource _audioSource;

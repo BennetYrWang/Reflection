@@ -10,7 +10,7 @@ public class SpriteAssetManager : MonoBehaviour
 
     private void Awake()
     {
-        LoadSpriteAssets();
+        LoadSpriteAssets(); 
     }
 
     private void LoadSpriteAssets()

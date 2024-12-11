@@ -15,7 +15,7 @@ namespace FileReading
 
         public TextContent ParseLine(ref string line)
         {
-            
+            return default;
         }
     }
 }
